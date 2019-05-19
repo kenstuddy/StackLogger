@@ -53,8 +53,8 @@ public final class StackLogger extends PrintStream {
 
     public void log(String className, Object message) {
         DateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy, h:mm:ss a");
-        Calendar cal = Calendar.getInstance();
-        String time = dateFormat.format(cal.getTime());
+        Calendar calendar = Calendar.getInstance();
+        String time = dateFormat.format(calendar.getTime());
         String line = "";
         //If the class name is Throwable, that means it's an error.
         if (className.equals("Throwable")) {
