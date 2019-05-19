@@ -55,18 +55,18 @@ public final class StackLogger extends PrintStream {
         DateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy, h:mm:ss a");
         Calendar cal = Calendar.getInstance();
         String time = dateFormat.format(cal.getTime());
-        String s = "";
+        String line = "";
         //If the class name is Throwable, that means it's an error.
         if (className.equals("Throwable")) {
-            s = "[" + time + "] " + "[" + className + "] [ERROR] " + message;
+            line = "[" + time + "] " + "[" + className + "] [ERROR] " + message;
         } else {
-            s = "[" + time + "] " + "[" + className + "] [INFO] " + message;
+            line = "[" + time + "] " + "[" + className + "] [INFO] " + message;
         }
-        super.print(s);
+        super.print(line);
         if (writer != null) {
             try {
                 //Write a byte array of the String of the log line plus the newline character to the log file.
-                writer.write((s + '\n').getBytes(), 0, s.length() + 1);
+                writer.write((line + '\n').getBytes(), 0, line.length() + 1);
             } catch (IOException e) {
                 e.printStackTrace();
             }
