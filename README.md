@@ -3,7 +3,7 @@ This Java project improves the usefulness of System.out and System.err print met
 
 # Requirements
 * Java 8 or newer
-* JetBrains IntelliJ 2019.1 or newer (optional)
+* IntelliJ IDEA 2019.1 or newer (optional)
 
 # How to Install
 To use this class, simply import it and put these two lines in your main method:
