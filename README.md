@@ -6,7 +6,7 @@ This Java project improves the usefulness of System.out and System.err print met
 * IntelliJ IDEA 2019.1 or newer (optional)
 
 # How to Install
-To use this class, simply import it and put these two lines in your main method:
+To use this class, simply import it (if necessary) and put these two lines in your main method:
 
 ```java
 System.setOut(new StackLogger(System.out, "information.txt"));
