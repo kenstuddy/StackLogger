@@ -10,11 +10,11 @@ import java.util.Calendar;
   * Date: May 19, 2019
   * Description: This class improves the usefulness of System.out and System.err print methods by logging the run-time stack. It displays the class name of where the print methods are called and also displays the date and time when the print methods are called. In addition, you can also output the logged information to a text file.
   * Instructions: To use this class, simply import it and put these two lines in your main method:
-     System.setOut(new StackLogger(System.out, "information.txt"));
-     System.setErr(new StackLogger(System.err, "errors.txt"));
+     System.setOut(new StackLogger(System.out, "information.txt", "out"));
+     System.setErr(new StackLogger(System.err, "errors.txt", "err"));
   * If you do not wish to log to a file, simply pass null as the second parameter, like so:
-     System.setOut(new StackLogger(System.out, null));
-     System.setErr(new StackLogger(System.err, null));
+     System.setOut(new StackLogger(System.out, null, "out"));
+     System.setErr(new StackLogger(System.err, null, "err"));
   * In general for logging in Java, I recommend using a logging facade like SLF4J preferably with a logging backend like Log4j2 so that you can achieve the ability to change the logging backend with SLF4J as well as the ability to have high performance asynchronous logging from Log4j2. However, this StackLogger class works very well if all you need is simple logging.
  */
 public final class StackLogger extends PrintStream {
