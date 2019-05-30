@@ -21,9 +21,10 @@ public final class StackLogger extends PrintStream {
 
 
     private final FileOutputStream writer;
-
-    public StackLogger(OutputStream out, String fileName) throws FileNotFoundException {
+    private final String outputType;
+    public StackLogger(OutputStream out, String fileName, String type) throws FileNotFoundException {
         super(out);
+        outputType = type;
         this.writer = fileName == null ? null : new FileOutputStream(new File(fileName), true);
     }
 
@@ -56,8 +57,8 @@ public final class StackLogger extends PrintStream {
         Calendar calendar = Calendar.getInstance();
         String time = dateFormat.format(calendar.getTime());
         String line = "";
-        //If the class name is Throwable, that means it's an error.
-        if (className.equals("Throwable")) {
+        //If the class name is Throwable or the outputType is set to "err", that means it's an error.
+        if (className.equals("Throwable") || outputType.equals("err")) {
             line = "[" + time + "] " + "[" + className + "] [ERROR] " + message;
         } else {
             line = "[" + time + "] " + "[" + className + "] [INFO] " + message;

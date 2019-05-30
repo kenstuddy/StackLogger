@@ -8,8 +8,8 @@ package com.stack_logger;
 public class Main {
     public static void main(String[] args) {
         try {
-            System.setOut(new StackLogger(System.out, "information.txt"));
-            System.setErr(new StackLogger(System.err, "errors.txt"));
+            System.setOut(new StackLogger(System.out, "information.txt", "out"));
+            System.setErr(new StackLogger(System.err, "errors.txt", "err"));
         } catch (Exception e) {
             e.printStackTrace();
         }
