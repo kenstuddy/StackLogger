@@ -22,6 +22,9 @@ public final class StackLogger extends PrintStream {
 
     private final FileOutputStream writer;
     private final String outputType;
+    private String line;
+    private static final ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
+
     public StackLogger(OutputStream out, String fileName, String type) throws FileNotFoundException {
         super(out);
         outputType = type;
@@ -56,7 +59,6 @@ public final class StackLogger extends PrintStream {
         DateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy, h:mm:ss a");
         Calendar calendar = Calendar.getInstance();
         String time = dateFormat.format(calendar.getTime());
-        String line = "";
         //If the class name is Throwable or the outputType is set to "err", that means it's an error.
         if (className.equals("Throwable") || outputType.equals("err")) {
             line = "[" + time + "] " + "[" + className + "] [ERROR] " + message;
@@ -64,13 +66,16 @@ public final class StackLogger extends PrintStream {
             line = "[" + time + "] " + "[" + className + "] [INFO] " + message;
         }
         super.print(line);
-        if (writer != null) {
-            try {
-                //Write a byte array of the String of the log line plus the newline character to the log file.
-                writer.write((line + '\n').getBytes(), 0, line.length() + 1);
-            } catch (IOException e) {
-                e.printStackTrace();
+        //Queue the IO to run on a different thread.
+        singleThreadExecutor.submit(() -> {
+            if (writer != null) {
+                try {
+                    //Write a byte array of the String of the log line plus the newline character to the log file.
+                    writer.write((line + '\n').getBytes(), 0, line.length() + 1);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
-        }
+        });
     }
 }
