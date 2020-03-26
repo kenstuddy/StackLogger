@@ -61,9 +61,9 @@ public final class StackLogger extends PrintStream {
         String time = dateFormat.format(calendar.getTime());
         //If the class name is Throwable or the outputType is set to "err", that means it's an error.
         if (className.equals("Throwable") || outputType.equals("err")) {
-            line = "[" + time + "] " + "[" + className + "] [ERROR] " + message;
+            line = "[" + time + "] " + "[" + Thread.currentThread().getName() + "] " + "[" + className + "] [ERROR] " + message;
         } else {
-            line = "[" + time + "] " + "[" + className + "] [INFO] " + message;
+            line = "[" + time + "] " + "[" + Thread.currentThread().getName() + "] " + "[" + className + "] [INFO] " + message;
         }
         super.print(line);
         //Queue the IO to run on a different thread.
