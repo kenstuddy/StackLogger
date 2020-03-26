@@ -5,7 +5,7 @@ package com.stack_logger;
   * Date: May 19, 2019
   * Description: This class is used as an example of the functionality of the StackLogger class. The StackLogger class can be added to any Java project using Java 8 or newer.
   */
-public class Main {
+public class MainClass {
     public static void main(String[] args) {
         try {
             System.setOut(new StackLogger(System.out, "information.txt", "out"));
