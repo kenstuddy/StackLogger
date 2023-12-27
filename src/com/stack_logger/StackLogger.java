@@ -82,12 +82,5 @@ public final class StackLogger extends PrintStream {
 
     public void close() {
         this.singleThreadExecutor.shutdown();
-        if (writer != null) {
-            try {
-                writer.close();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
     }
 }
