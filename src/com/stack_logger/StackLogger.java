@@ -24,7 +24,7 @@ public final class StackLogger extends PrintStream {
     private final FileOutputStream writer;
     private final String outputType;
     private String line;
-    private static final ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
+    private final ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
 
     public StackLogger(OutputStream out, String fileName, String type) throws FileNotFoundException {
         super(out);
@@ -81,7 +81,7 @@ public final class StackLogger extends PrintStream {
     }
 
     public void close() {
-        StackLogger.singleThreadExecutor.shutdown();
+        this.singleThreadExecutor.shutdown();
         if (writer != null) {
             try {
                 writer.close();
