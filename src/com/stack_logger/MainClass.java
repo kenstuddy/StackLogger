@@ -8,12 +8,18 @@ package com.stack_logger;
 public class MainClass {
     public static void main(String[] args) {
         try {
-            System.setOut(new StackLogger(System.out, "information.txt", "out"));
-            System.setErr(new StackLogger(System.err, "errors.txt", "err"));
+            StackLogger infoLogger = new StackLogger(System.out, "information.txt", "out");
+            System.setOut(infoLogger);
+            StackLogger errorLogger = new StackLogger(System.err, "errors.txt", "err");
+            System.setErr(errorLogger);
+            System.err.println("This is an example of an error when using the Stack Logger.");
+            System.err.println("This is an example of another error when using the Stack Logger.");
+            System.out.println("This is an example of information when using the Stack Logger.");
+            System.out.println("This is an example of more information when using the Stack Logger.");
+            infoLogger.close();
+            errorLogger.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.err.println("This is an example of an error when using the Stack Logger.");
-        System.out.println("This is an example of information when using the Stack Logger.");
     }
 }
