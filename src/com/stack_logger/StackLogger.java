@@ -21,7 +21,6 @@ import java.util.concurrent.Executors;
   */
 public final class StackLogger extends PrintStream {
 
-
     private final FileOutputStream writer;
     private final String outputType;
     private String line;
@@ -79,5 +78,16 @@ public final class StackLogger extends PrintStream {
                 }
             }
         });
+    }
+
+    public void close() {
+        StackLogger.singleThreadExecutor.shutdown();
+        if (writer != null) {
+            try {
+                writer.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 }
